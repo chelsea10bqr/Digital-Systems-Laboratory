@@ -1,0 +1,42 @@
+module register_unit (input  logic 	Clk, 
+												Reset,
+												Load_IR, Load_PC, Load_MAR, Load_MDR,
+												Gate_IR, Gate_PC, Gate_MDR,
+                      input  logic [15:0] IR_In, PC_In, MAR_In, MDR_In,
+                      output logic [15:0] IR_Out, PC_Out, MAR_Out, MDR_Out
+							 );
+
+
+    reg_16  IR (
+					.Clk, 
+					.Reset, 
+					.Load(Load_IR),
+	            .Data_In(IR_In), 
+					.Data_Out(IR_Out)
+					);
+					
+    reg_16  PC (
+					.Clk, 
+					.Reset, 
+					.Load(Load_PC),
+	            .Data_In(PC_In), 
+					.Data_Out(PC_Out)
+					);
+					
+	 reg_16  MAR (
+					.Clk, 
+					.Reset, 
+					.Load(Load_MAR),
+	            .Data_In(MAR_In), 
+					.Data_Out(MAR_Out)
+					);
+					
+    reg_16  MDR (
+					.Clk, 
+					.Reset, 
+					.Load(Load_MDR),
+	            .Data_In(MDR_In), 
+					.Data_Out(MDR_Out)
+					);
+
+endmodule

@@ -1,0 +1,24 @@
+module mux_bus
+(
+	input  logic [15:0] In_0,
+							  In_1,
+							  In_2,
+							  In_3,
+	input  logic [3:0]  S,
+	output logic [15:0] Out
+);
+
+	always_comb
+	begin
+	
+		case (S)
+			4'b0001: Out = Din_0;
+			4'b0010: Out = Din_1;
+			4'b0100: Out = Din_2;
+			4'b1000: Out = Din_3;
+			default: Dout = 16'bxxxxxxxxxxxxxxxx;
+		endcase
+	
+	end
+
+endmodule

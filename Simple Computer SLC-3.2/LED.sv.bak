@@ -1,0 +1,15 @@
+module LEDunit	( input logic Clk,
+                        LD_LED,
+				  input logic [11:0] IR,
+				  output logic [11:0] LED
+);
+	always_ff @ (posedge Clk)
+	begin
+	      LED <= 12'h0;
+	
+		if (LD_LED)
+			LED <= IR[11:0];
+	
+	end
+	
+endmodule

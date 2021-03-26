@@ -1,0 +1,60 @@
+module register_file
+(
+	input  logic		  Clk, Reset, LD_REG
+	input  logic [15:0] BUS_Val,
+	input  logic [2:0]  DR_Val,
+							  SR1_Val,
+							  SR2_Val,
+	output logic [15:0] SR1_Out,
+							  SR2_Out
+);
+
+	logic [15:0] REG_Out [8];
+	
+	logic Load0,
+			Load1,
+			Load2,
+			Load3,
+			Load4,
+			Load5,
+			Load6,
+			Load7;
+
+	assign SR1_Out = REG_Out[SR1_Val];
+	assign SR2_Out = REG_Out[SR2_Val];
+
+	register_16_bit R0 (.*, .Load(Load0), .Din(BUS_Val), .Dout(REG_Out[0]));
+	register_16_bit R1 (.*, .Load(Load1), .Din(BUS_Val), .Dout(REG_Out[1]));
+	register_16_bit R2 (.*, .Load(Load2), .Din(BUS_Val), .Dout(REG_Out[2]));
+	register_16_bit R3 (.*, .Load(Load3), .Din(BUS_Val), .Dout(REG_Out[3]));
+	register_16_bit R4 (.*, .Load(Load4), .Din(BUS_Val), .Dout(REG_Out[4]));
+	register_16_bit R5 (.*, .Load(Load5), .Din(BUS_Val), .Dout(REG_Out[5]));
+	register_16_bit R6 (.*, .Load(Load6), .Din(BUS_Val), .Dout(REG_Out[6]));
+	register_16_bit R7 (.*, .Load(Load7), .Din(BUS_Val), .Dout(REG_Out[7]));
+
+	always_comb
+	begin
+	
+		Load0 = 1'b0;
+		Load1 = 1'b0;
+		Load2 = 1'b0;
+		Load3 = 1'b0;
+		Load4 = 1'b0;
+		Load5 = 1'b0;
+		Load6 = 1'b0;
+		Load7 = 1'b0;
+	
+		case (DR_Val)
+			3'b000: Load0 = LD_REG; 
+			3'b001: Load1 = LD_REG;
+			3'b010: Load2 = LD_REG;
+			3'b011: Load3 = LD_REG;
+			3'b100: Load4 = LD_REG;
+			3'b101: Load5 = LD_REG;
+			3'b110: Load6 = LD_REG;
+			3'b111: Load7 = LD_REG;
+		endcase
+	
+	end
+
+endmodule

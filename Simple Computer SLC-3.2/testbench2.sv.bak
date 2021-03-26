@@ -1,0 +1,4 @@
+module testbench2();
+
+	timeunit		  10ns;
+	timeprecision 1ns;
